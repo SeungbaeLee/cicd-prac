@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant Search Results</title>
+</head>
+<body>
+
+<h1>Restaurant Search Results</h1>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Restaurant Name</th>
+    <th>Address</th>
+    <th>Category</th>
+  </tr>
+  </thead>
+  <tbody th:each="resDocResponseDto : ${pageDto.content}">
+  <tr>
+    <td th:text="${resDocResponseDto.id}"></td>
+    <td th:text="${resDocResponseDto.restaurantName}"></td>
+    <td th:text="${resDocResponseDto.address}"></td>
+    <td th:text="${resDocResponseDto.category}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<div>
+  <span>Total Pages: ${pageDto.totalPages}</span>
+  <span>Total Elements: ${pageDto.totalElements}</span>
+</div>
+
+<div th:if="${pageDto.hasPrevious}">
+  <a th:href="@{'/testES?page=' + ${pageDto.number - 1}}">Previous</a>
+</div>
+
+<div th:if="${pageDto.hasNext}">
+  <a th:href="@{'/testES?page=' + ${pageDto.number + 1}}">Next</a>
+</div>
+
+</body>
+</html>
