@@ -10,25 +10,19 @@ on:
 jobs:
   CI-CD:
     runs-on: ubuntu-latest
+
     steps:
       # JDK setting
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'seungbae-server'
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      # gradle caching - 빌드 시간 향상
-#      - name: Gradle Caching
-#        uses: actions/cache@v3
-#        with:
-#          path: |
-#            ~/.gradle/caches
-#            ~/.gradle/wrapper
-#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-#          restore-keys: |
-#            ${{ runner.os }}-gradle-
+      - name: Set up JDK 17
+        uses: actions/setup-java@3
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+          cache: 'gradle'
+
       - name: make application.yml
         if: |
           contains(github.ref, 'master')
