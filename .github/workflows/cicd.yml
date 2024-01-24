@@ -54,7 +54,7 @@ jobs:
       - name: Generate deployment package
         run: |
           mkdir -p deploy
-          cp cicd/build/libs/cicd.jar deploy/todo
+          cp cicd/build/libs/*.jar deploy/todo
           cp -r .ebextensions deploy/.ebextensions
           cp -r .platform deploy/.platform
           cd deploy && zip -r deploy.zip .
